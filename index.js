@@ -7,6 +7,7 @@ const mongoose = require('mongoose')
 
 
 require('./Schema/User')
+const getToken = require('./middleware/getToken')
 const authenticationRoutes = require('./Routes/authenticationRoutes')
 app.use(bodyParser.json())
 app.use(authenticationRoutes)
@@ -24,8 +25,12 @@ mongoose.connection.on('connected', () => {
 
 
 
-app.get('/' , (req,res) =>{
-    res.send('Home Route')
+// app.get('/' , (req,res) =>{
+//     res.send('Home Route')
+// })
+
+app.get('/', getToken , (req , res) => {
+    res.send("your email is" + req.user.email)
 })
 
 app.listen(PORT,() =>{
