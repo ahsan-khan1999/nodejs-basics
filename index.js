@@ -30,7 +30,7 @@ mongoose.connection.on('connected', () => {
 // })
 
 app.get('/', getToken , (req , res) => {
-    res.send("your email is" + req.user.email)
+    res.send("your email is" + req.user.password)
 })
 
 app.listen(PORT,() =>{
